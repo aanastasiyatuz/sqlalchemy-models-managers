@@ -29,7 +29,7 @@ class QuerySet:
         if self.exists():
             table = self.model.__name__
             ids = [f" id = {i.id} " for i in self.objects]
-            Manager.execute(f"delete from {table} where {' or '.join(ids)};")
+            self.model.objects.execute(f"delete from {table} where {' or '.join(ids)};")
 
 class Manager:
     def execute(self, command):
